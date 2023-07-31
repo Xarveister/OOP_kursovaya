@@ -53,14 +53,13 @@ def save_database(database_name: str, params: dict):
             employer_id int PRIMARY KEY,
             name varchar(255) NOT NULL)
 
-        );
-
+        
         CREATE TABLE IF NOT EXISTS vacancies(
                 vacancy_id int PRIMARY KEY,
                 vacancy_name varchar(255) NOT NULL,
                 published_date date,
-                salary_from int NOT NULL,
-                salary_to int NOT NULL,
+                salary_from int,
+                salary_to int,
                 url text NOT NULL,
                 employer_id int REFERENCES employers(employer_id) ON UPDATE CASCADE
         )
@@ -73,8 +72,9 @@ def save_database(database_name: str, params: dict):
     employer_data = get_data()[-1]
 
     cur.executemany("""INSERT INTO employers VALUES (%s, %s) ON CONFLICT (employer_id) DO NOTHING;""", employer_data)
-    cur.executemany("""INSERT INTO vacancies VALUES (%s, %s, %s, %s, %s, %s, %s, %s) ON CONFLICT (vacancy_id) DO NOTHING""",
+    cur.executemany("""INSERT INTO vacancies VALUES (%s, %s, %s, %s, %s, %s, %s) ON CONFLICT (vacancy_id) DO NOTHING""",
                     vacancies_data)
 
     cur.close()
     conn.close()
+

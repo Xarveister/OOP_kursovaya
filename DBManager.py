@@ -1,6 +1,5 @@
 import psycopg2
 from config import config
-
 params = config()
 conn = psycopg2.connect(dbname=database_name, **params)
 conn.autocommit = True
@@ -25,7 +24,7 @@ class DBManager:
     def get_all_vacancies(self):
         """Метод, который получает все вакансии с указанием названия компании, названия вакансии и зарплаты и ссылки на вакансию."""
         self.cursor.execute("""	     		
-        SELECT vacancy_name, salary_from, salary_to, url, company_name FROM	vacancies
+        SELECT vacancy_name, salary_from, salary_to, url FROM	vacancies
         FULL JOIN employers USING(employer_id)	
         """)
         return self.cursor.fetchall()
