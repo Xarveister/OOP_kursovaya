@@ -22,7 +22,7 @@ def main():
     pprint(db_manager.get_vacancies_with_higher_salary())
     print('')
     pprint(db_manager.get_vacancies_with_keyword(user_input=input().title()))
-
+    db_manager.close_db_connection()
 
 if __name__ == "__main__":
     main()

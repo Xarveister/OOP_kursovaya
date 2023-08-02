@@ -1,16 +1,14 @@
 import psycopg2
 from config import config
 params = config()
-conn = psycopg2.connect(dbname=database_name, **params)
-conn.autocommit = True
-cur = conn.cursor()
-
 
 class DBManager:
     """Класс для подключения к базе данных"""
 
-    def __init__(self):
-        self.cursor = cur
+    def __init__(self, database_name:str):
+        self.conn = psycopg2.connect(dbname=database_name, **params)
+        self.conn.autocommit = True
+        self.cursor = self.conn.cursor()
 
     def get_companies_and_vacancies_count(self):
         """Метод, который получает список всех компаний и количество вакансий"""
@@ -53,3 +51,8 @@ class DBManager:
         WHERE vacancy_name LIKE '%{user_input}%'
         """)
         return self.cursor.fetchall()
+
+    def close_db_connection(self):
+        # todo
+        if not self.conn.closed:
+            self.conn.close()

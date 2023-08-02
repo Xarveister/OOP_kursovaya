@@ -62,9 +62,7 @@ def save_database(database_name: str, params: dict):
                 salary_to int,
                 url text NOT NULL,
                 employer_id int REFERENCES employers(employer_id) ON UPDATE CASCADE
-        )
-
-
+        );       
         """)
     cur.execute('TRUNCATE vacancies RESTART IDENTITY CASCADE')
     cur.execute('TRUNCATE employers RESTART IDENTITY CASCADE')
