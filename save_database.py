@@ -51,7 +51,7 @@ def save_database(database_name: str, params: dict):
     cur.execute("""
         CREATE TABLE IF NOT EXISTS employers(
             employer_id int PRIMARY KEY,
-            name varchar(255) NOT NULL)
+            name varchar(255) NOT NULL);
 
         
         CREATE TABLE IF NOT EXISTS vacancies(
