@@ -10,9 +10,9 @@ from save_database import save_database
 def main():
     params = config()
     API_hh()
-    create_database('Vacancy', params)
-    save_database('Vacancy', params)
-    db_manager = DBManager('Vacancy')
+    create_database('vacancy', params)
+    save_database('vacancy', params)
+    db_manager = DBManager('vacancy')
     pprint(db_manager.get_companies_and_vacancies_count())
     print('')
     pprint(db_manager.get_all_vacancies())
